@@ -15,6 +15,7 @@
 	<![endif]-->
 
 	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<script src="js/main.js"></script>
 
 	<?php
@@ -24,6 +25,8 @@
 			$class = '';
 			$original = '';
 			$changed = '';
+			$dataToggle = '';
+			$title = '';
 
 			if (isset($Result['new'][$key])){
 				$class = 'new';
@@ -33,13 +36,15 @@
 				$class = 'changed';
 				$original = nl2br(preg_replace('|"|', '&quot;', $Result['changed'][$key][1]));
 				$changed = nl2br(preg_replace('|"|', '&quot;', $Result['changed'][$key][0]));
+				$dataToggle = 'data-toggle="tooltip"';
+				$title = round($Result['changed'][$key][2], 2) . '%';
 			}
 
 			if (isset($Result['deleted'][$key-1])){
 				$comparedText .= '<span class="deleted">' . nl2br($SentencesOriginal[0][$key-1]) . '</span>';
 			}
 
-			$comparedText .= '<span class="' . $class . '" data-original="' . $original . '" data-changed="' . $changed . '">' . nl2br($sentence) . '</span>';
+			$comparedText .= '<span class="' . $class . '" data-original="' . $original . '" data-changed="' . $changed . '"' . $dataToggle . 'data-placement="top" title="' . $title . '">' . nl2br($sentence) . '</span>';
 		}
 
 		while (isset($SentencesOriginal[0][$key])){
