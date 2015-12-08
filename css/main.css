@@ -1,0 +1,28 @@
+.compareTextarea{
+    height: auto;
+}
+
+textarea{
+    /*display: none !important;*/
+    height: 300px !important;
+}
+
+span.new{
+    background-color: #179738;
+    color: #fff;
+}
+
+span.deleted{
+    background-color: #d03a1e;
+    color: #fff;
+}
+
+span.changed{
+    background-color: #fffcb4;
+}
+
+#compared-wrap{
+    border: 1px solid #337ab7;
+    margin: 15px;
+    padding: 10px;
+}
