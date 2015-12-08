@@ -31,8 +31,8 @@
 
 			if (isset($Result['changed'][$key])){
 				$class = 'changed';
-				$original = nl2br($Result['changed'][$key][1]);
-				$changed = nl2br($Result['changed'][$key][0]);
+				$original = nl2br(preg_replace('|"|', '&quot;', $Result['changed'][$key][1]));
+				$changed = nl2br(preg_replace('|"|', '&quot;', $Result['changed'][$key][0]));
 			}
 
 			if (isset($Result['deleted'][$key-1])){
