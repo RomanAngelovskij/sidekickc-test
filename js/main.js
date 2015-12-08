@@ -12,4 +12,6 @@ jQuery(document).ready(function($){
         var changed = $(this).data("changed");
         $(this).html(changed);
     })
+
+    $('[data-toggle="tooltip"]').tooltip()
 })
