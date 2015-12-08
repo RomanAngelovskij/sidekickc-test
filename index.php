@@ -53,7 +53,7 @@ if (isset($_POST['Text'])){
 
 function getSenteces($text){
 	//$Sentences = preg_split("|(?<=[.?!:\n])\s+?(?=[^\s])|iu", strip_tags($text));
-	preg_match_all('|([^.?!:\n])+([.?!:\n\r])+\s+?|iu', $text, $Sentences);
+	preg_match_all('|([^.?!:\n])+([.?!:\n\r])+\s?|iu', $text, $Sentences);
 
 	return !empty($Sentences) ? $Sentences : null;
 }
@@ -62,8 +62,13 @@ function difference($s1, $s2){
 	$s1 = preg_replace("|\p{Cc}+|u", '', $s1);
 	$s2 = preg_replace("|\p{Cc}+|u", '', $s2);
 
-	$result = levenshtein($s1, $s2) / strlen($s1)*100;
-	//echo '<li>' . $s1 . ' => ' . $s2 . '(' . $result . ')<br>';
+	if (strlen($s1) > 255 || strlen($s2) > 255){
+		similar_text($s1, $s2, $result);
+	} else {
+		$result = levenshtein($s1, $s2) / strlen($s1)*100;
+	}
+
+	//echo '<li>' . $s1 . ' => ' . $s2 . '(' . similar_text($s1, $s2) . ')<br>';
 	return $result;
 }
 
