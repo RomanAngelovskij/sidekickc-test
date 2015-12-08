@@ -41,6 +41,11 @@
 
 			$comparedText .= '<span class="' . $class . '" data-original="' . $original . '" data-changed="' . $changed . '">' . nl2br($sentence) . '</span>';
 		}
+
+		while (isset($SentencesOriginal[0][$key])){
+			$comparedText .= '<span class="deleted">' . nl2br($SentencesOriginal[0][$key]) . '</span>';
+			$key++;
+		}
 	}
 	?>
 	<script>
