@@ -40,16 +40,18 @@
 				$title = round($Result['changed'][$key][2], 2) . '%';
 			}
 
-			if (isset($Result['deleted'][$key-1])){
-				$comparedText .= '<span class="deleted">' . nl2br($SentencesOriginal[0][$key-1]) . '</span>';
+			if (isset($Result['deleted'][$key])){
+				$comparedText .= '<span class="deleted">' . nl2br($SentencesOriginal[0][$key]) . '</span>';
+				unset($Result['deleted'][$key]);
 			}
 
 			$comparedText .= '<span class="' . $class . '" data-original="' . $original . '" data-changed="' . $changed . '"' . $dataToggle . 'data-placement="top" title="' . $title . '">' . nl2br($sentence) . '</span>';
 		}
 
-		while (isset($SentencesOriginal[0][$key])){
-			$comparedText .= '<span class="deleted">' . nl2br($SentencesOriginal[0][$key]) . '</span>';
-			$key++;
+		if (!empty($Result['deleted'])){
+			foreach ($Result['deleted'] as $key => $sentence){
+				$comparedText .= '<span class="deleted">' . nl2br($sentence[0]) . '</span>';
+			}
 		}
 	}
 	?>

@@ -46,7 +46,7 @@ if (isset($_POST['Text'])){
 		}
 
 		if ($deleted === true){
-			$Result['deleted'][$sentKey1] = $sentence1;
+			$Result['deleted'][$sentKey1] = array($sentence1, $sentKey2);
 		}
 	}
 }
