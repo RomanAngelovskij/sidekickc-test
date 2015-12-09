@@ -1,5 +1,5 @@
 <?php
-define('CHANGES_PERCENT', 10);
+define('CHANGES_PERCENT', 5);
 if (isset($_POST['Text'])){
 	$Result = array(
 		'deleted' => array(),
@@ -53,14 +53,14 @@ if (isset($_POST['Text'])){
 
 function getSenteces($text){
 	//$Sentences = preg_split("|(?<=[.?!:\n])\s+?(?=[^\s])|iu", strip_tags($text));
-	preg_match_all('|([^.?!:\n])+([.?!:\n\r])+\s?|iu', $text, $Sentences);
+	preg_match_all('/([^.?:!\n])+([.?:!\n\r])+\s?|([^.?:!\n])+$/iu', $text, $Sentences);
 
 	return !empty($Sentences) ? $Sentences : null;
 }
 
 function difference($s1, $s2){
-	$s1 = preg_replace("|\p{Cc}+|u", '', $s1);
-	$s2 = preg_replace("|\p{Cc}+|u", '', $s2);
+	$s1 = trim(preg_replace("|\p{Cc}+|u", '', $s1));
+	$s2 = trim(preg_replace("|\p{Cc}+|u", '', $s2));
 
 	if (strlen($s1) > 255 || strlen($s2) > 255){
 		similar_text($s1, $s2, $result);
