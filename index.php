@@ -9,8 +9,8 @@ if (isset($_POST['Text'])){
 	$SentencesOriginal = getSenteces($_POST['Text']['Original']);
 	$SentencesToCompare = getSenteces($_POST['Text']['ToCompare']);
 
-	$Diff1 = array_diff($SentencesOriginal[0], $SentencesToCompare[0]);
-	$Diff2 = array_diff($SentencesToCompare[0], $SentencesOriginal[0]);
+	$Diff1 = array_diff($SentencesOriginal[1], $SentencesToCompare[1]);
+	$Diff2 = array_diff($SentencesToCompare[1], $SentencesOriginal[1]);
 
 	foreach ($Diff2 as $sentKey2 => $sentence1){
 		$new = true;
@@ -53,7 +53,7 @@ if (isset($_POST['Text'])){
 
 function getSenteces($text){
 	//$Sentences = preg_split("|(?<=[.?!:\n])\s+?(?=[^\s])|iu", strip_tags($text));
-	preg_match_all('/([^.?:!\n])+([.?:!\n\r])+\s?|([^.?:!\n])+$/iu', $text, $Sentences);
+	preg_match_all('/(([^.?:!\n])+([.?:!\n\r])+|([^.?:!\n])+$)\s?/iu', $text, $Sentences);
 
 	return !empty($Sentences) ? $Sentences : null;
 }
@@ -68,7 +68,7 @@ function difference($s1, $s2){
 		$result = levenshtein($s1, $s2) / strlen($s1)*100;
 	}
 
-	//echo '<li>' . $s1 . ' => ' . $s2 . '(' . similar_text($s1, $s2) . ')<br>';
+	//echo '<li>' . $s1 . ' => ' . $s2 . '(' . $result . ')<br>';
 	return $result;
 }
 
