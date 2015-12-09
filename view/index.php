@@ -32,7 +32,7 @@
 				$class = 'new';
 			}
 
-			if (isset($Result['changed'][$key])){
+			if (isset($Result['changed'][$key]) && $Result['changed'][$key][2] > 0){
 				$class = 'changed';
 				$original = nl2br(preg_replace('|"|', '&quot;', $Result['changed'][$key][1]));
 				$changed = nl2br(preg_replace('|"|', '&quot;', $Result['changed'][$key][0]));
